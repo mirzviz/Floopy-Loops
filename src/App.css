@@ -4,7 +4,7 @@
 
 .track th {
   text-align: right;
-  width: 170px;
+  width: 470px; 
 }
 
 .track .vol {
@@ -23,24 +23,24 @@
 }
 
 .beat.active {
-  background: pink;
+  background: hsla(44, 56%, 29%, 0.897);
 }
 
 .beat.current {
-  background: #f5f5eb;
+  background: #be68044f;
 }
 
 .beat:nth-of-type(3),
 .beat:nth-of-type(7),
 .beat:nth-of-type(11),
 .beat:nth-of-type(15) {
-  border-left: 4px solid lightblue;
+  border-left: 4px solid rgb(207, 188, 12);
 }
 
 .beat > a {
   display: inline-block;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
 }
 
 .controls td {

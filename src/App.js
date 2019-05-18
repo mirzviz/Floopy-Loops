@@ -26,9 +26,9 @@ import * as model from "./model";
 import samples from "./samples.json";
 
 
-class SampleSelector extends Component {
+class SampleSelector extends Component<Props, State> {
   state: {
-    open: boolean,
+    open: boolean
   };
 
   constructor(props) {
@@ -68,6 +68,8 @@ class SampleSelector extends Component {
   }
 }
 
+//----------------------------------------------------
+
 function TrackListView({
   tracks,
   currentBeat,
@@ -82,7 +84,7 @@ function TrackListView({
     <tbody>{
       tracks.map((track, i) => {
         return (
-          <tr key={i}className="track">
+          <tr key={i} className="track">
             <th>
               <SampleSelector id={track.id} current={track.name} onChange={updateTrackSample} />
             </th>
@@ -176,7 +178,9 @@ function ShareDialog({hash, closeDialog}) {
   );
 }
 
-class App extends Component {
+//-------------------------------APP---------------------------------
+
+class App extends Component<Props, State> {
   loop: Tone.Sequence;
 
   state: {
@@ -306,17 +310,11 @@ class App extends Component {
     const {updateBPM, start, stop, addTrack, share, randomSong, closeDialog} = this;
     return (
       <div className="app">
-        <h3>tinysynth</h3>
-        {shareHash ?
-          <ShareDialog hash={shareHash} closeDialog={closeDialog} /> : null}
+        <h3>Floopy Loops</h3>
+        {
+          shareHash ? <ShareDialog hash={shareHash} closeDialog={closeDialog} /> : null
+        }
         <table>
-          <tr>
-            <td colSpan="19">
-              <p style={{textAlign: "right"}}>
-                <Button type="button" colored onClick={randomSong}>I am uninspired, get me some random tracks</Button>
-              </p>
-            </td>
-          </tr>
           <TrackListView
             tracks={tracks}
             currentBeat={currentBeat}
