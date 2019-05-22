@@ -4,13 +4,20 @@ import type { Track, EncodedTrack } from "./types";
 import samples from "./samples.json";
 
 
-export function initTracks(): Track[] {
-  return [
-    {id: 1, name: "hihat-reso", vol: .4, muted: false, beats: initBeats(16)},
-    {id: 2, name: "hihat-plain", vol: .4, muted: false, beats: initBeats(16)},
-    {id: 3, name: "snare-vinyl01", vol: .9, muted: false, beats: initBeats(16)},
-    {id: 4, name: "kick-electro01", vol: .8, muted: false, beats: initBeats(16)},
-  ];
+export function initTracks(numOfTracks: Number, trackLengths: Number[]): Track[] {
+  // return [
+  //   {id: 1, name: "hihat-reso", vol: .4, muted: false, beats: initBeats(4)},
+  //   {id: 2, name: "hihat-plain", vol: .4, muted: false, beats: initBeats(16)},
+  //   {id: 3, name: "snare-vinyl01", vol: .9, muted: false, beats: initBeats(16)},
+  //   {id: 4, name: "kick-electro01", vol: .8, muted: false, beats: initBeats(16)},
+  // ];
+
+  const tracks = [];
+  for(let i = 0; i < numOfTracks; i++){
+    tracks.push({id: i, name: "kick-electro01", vol: .5, muted: false, beats: initBeats(trackLengths[i])});
+  }
+  console.log(tracks);
+  return tracks
 }
 
 export function initBeats(n: number): boolean[] {
@@ -22,7 +29,7 @@ export function addTrack(tracks: Track[]) {
   return [
     ...tracks, {
       id,
-      name: "kick-electro01",
+      name: samples[Math.floor(Math.random() * samples.length)],
       vol: .8,
       muted: false,
       beats: initBeats(16),
@@ -30,12 +37,12 @@ export function addTrack(tracks: Track[]) {
   ];
 }
 
-export function clearTrack(tracks: Track[], id: number): Track[] {
+export function clearTrack(tracks: Track[], id: number, numOfBeats: number): Track[] {
   return tracks.map((track) => {
     if (track.id !== id) {
       return track;
     } else {
-      return {...track, beats: initBeats(16)};
+      return {...track, beats: initBeats(numOfBeats)};
     }
   });
 }
