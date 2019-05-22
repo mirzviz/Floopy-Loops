@@ -42,7 +42,7 @@ import Pad from "../../containers/Pad/Pad";
                 <Switch defaultChecked={!track.muted} onChange={event => muteTrack(track.id)} />
               </td>
               {
-                track.beats.map((beat, i) => {
+                track.beats.map((beat, beatIndex) => {
       
                   //return (
                     // <Pad 
@@ -56,13 +56,13 @@ import Pad from "../../containers/Pad/Pad";
                     //                   }></Pad>
 
                 //);
-                const beatClass = beat ? "active" : i === currentBeat ? "current" : "";
+                const beatClass = beat ? "active" : beatIndex === currentBeat ? "current" : "";
                 return (
-                        <td key={i} className={`beat ${beatClass}`}>
+                        <td key={beatIndex} className={`beat ${beatClass}`}>
                           <a href="" onClick={(event) => {
                             console.log(event);
                             event.preventDefault();
-                            toggleTrackBeat(track.id, i);
+                            toggleTrackBeat(track.id, beatIndex);
                           }} />
                         </td>
                       );
