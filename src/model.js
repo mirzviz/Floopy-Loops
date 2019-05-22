@@ -16,7 +16,7 @@ export function initTracks(numOfTracks: Number, trackLengths: Number[]): Track[]
   for(let i = 0; i < numOfTracks; i++){
     tracks.push({id: i, name: "kick-electro01", vol: .5, muted: false, beats: initBeats(trackLengths[i])});
   }
-  console.log(tracks);
+  
   return tracks
 }
 

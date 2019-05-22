@@ -14,55 +14,6 @@
   font-family: Helvetica, Arial, Helvetica, sans-serif;
 }
 
-.chooseBeat {
-  text-decoration: none;
-  color: #b5b88a;
-  font-weight: bold;
-}
-
-
-
-.track th {
-  text-align: left;
-  width: 100px; 
-}
-
-.track .vol {
-  width: 140px;
-  height: 20px;
-}
-
-.track .mute {
-  width: 56px;
-}
-
-.beat {
-  background: #eee;
-  text-align: center;
-  line-height: 1em;
-  border-radius: 0.1px;
-}
-
-.beat.active {
-  background: hsla(44, 56%, 29%, 0.897);
-}
-
-.beat.current {
-  background: #e2d4074f;
-}
-
-.beat:nth-of-type(3),
-.beat:nth-of-type(7),
-.beat:nth-of-type(11),
-.beat:nth-of-type(15) {
-  border-left: 4px solid rgb(207, 188, 12);
-}
-
-.beat > a {
-  display: inline-block;
-  width: 48px;
-  height: 48px;
-}
 
 .controls td {
   padding-top: .5em;

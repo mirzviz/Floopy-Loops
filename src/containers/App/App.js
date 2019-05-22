@@ -64,6 +64,10 @@ class App extends Component<Props, State> {
     };
     this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat);
     sequencer.updateBPM(this.state.bpm);
+    //this.start();
+  }
+
+  componentDidMount(){
     this.start();
   }
 

@@ -6,10 +6,12 @@ import { Button,Dialog,DialogActions,DialogContent,DialogTitle,
     FABButton,Icon,Slider,Switch,} from "react-mdl";
 import "react-mdl/extra/css/material.light_blue-pink.min.css";
 import "react-mdl/extra/material.js";
+import "./TrackListView.css";
 import SampleSelector from '../../containers/SampleSelector/SampleSelector'
 import * as sequencer from "../../sequencer";
 import * as model from "../../model";
 import samples from "../../samples.json";
+import Pad from "../../containers/Pad/Pad";
 
     const TrackListView = ({ tracks,
                             currentBeat,
@@ -21,7 +23,8 @@ import samples from "../../samples.json";
                             numOfTracks,
                             trackLengths,
                             clearTrack,
-                            deleteTrack }) => 
+                            deleteTrack
+                          }) => 
     {
     return (
       <tbody>{
@@ -39,16 +42,31 @@ import samples from "../../samples.json";
                 <Switch defaultChecked={!track.muted} onChange={event => muteTrack(track.id)} />
               </td>
               {
-                track.beats.map((v, beat) => {
-                  const beatClass = v ? "active" : beat === currentBeat ? "current" : "";
-                  return (
-                          <td key={beat} className={`beat ${beatClass}`}>
-                            <a href="" onClick={(event) => {
-                              event.preventDefault();
-                              toggleTrackBeat(track.id, beat);
-                            }} />
-                          </td>
-                        );
+                track.beats.map((beat, i) => {
+      
+                  //return (
+                    // <Pad 
+                    //     key={i} 
+                    //     myKey={i}
+                    //     currBeat={currentBeat}
+                    //     click={ (event) => {
+                    //                     console.log(event);
+                    //                     event.preventDefault(); 
+                    //                     toggleTrackBeat(track.id, i)}
+                    //                   }></Pad>
+
+                //);
+                const beatClass = beat ? "active" : i === currentBeat ? "current" : "";
+                return (
+                        <td key={i} className={`beat ${beatClass}`}>
+                          <a href="" onClick={(event) => {
+                            console.log(event);
+                            event.preventDefault();
+                            toggleTrackBeat(track.id, i);
+                          }} />
+                        </td>
+                      );
+
                 })
               }
               <td>
