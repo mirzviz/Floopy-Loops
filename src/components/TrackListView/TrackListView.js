@@ -44,42 +44,31 @@ import Pad from "../../containers/Pad/Pad";
               {
                 track.beats.map((beat, beatIndex) => {
       
-                  //return (
-                    // <Pad 
-                    //     key={i} 
-                    //     myKey={i}
-                    //     currBeat={currentBeat}
-                    //     click={ (event) => {
-                    //                     console.log(event);
-                    //                     event.preventDefault(); 
-                    //                     toggleTrackBeat(track.id, i)}
-                    //                   }></Pad>
+                  return (
+                    <Pad 
+                        key={beatIndex} 
+                        myKey={beatIndex}
+                        currBeat={currentBeat}
+                        click={ (event) => {
+                                        toggleTrackBeat(track.id, beatIndex)}
+                                      }></Pad>
 
-                //);
-                const beatClass = beat ? "active" : beatIndex === currentBeat ? "current" : "";
-                return (
-                        <td key={beatIndex} className={`beat ${beatClass}`}>
-                          <a href="" onClick={(event) => {
-                            console.log(event);
-                            event.preventDefault();
-                            toggleTrackBeat(track.id, beatIndex);
-                          }} />
-                        </td>
-                      );
-
-                })
+                );})
               }
               <td>
-                {track.beats.some(v => v) ?
-                  <a href="" title="Clear track" onClick={event => {
-                    event.preventDefault();
-                    clearTrack(track.id, trackLengths[track.id]);
-                  }}><Icon name="delete"/></a> :
-                  <Icon className="disabled-icon" name="delete"/>}
+                {track.beats.some(v => v) ? <a href="" title="Clear track" onClick={event => {
+                                                                          event.preventDefault();
+                                                                          clearTrack(track.id, trackLengths[track.id]);
+                                                                        }}>
+                                            <Icon name="delete"/>
+                                            </a> :
+                                            <Icon className="disabled-icon" name="delete"/>
+                  }
                 <a href="" title="Delete track" onClick={event => {
-                  event.preventDefault();
-                  deleteTrack(track.id);
-                }}><Icon name="delete_forever"/></a>
+                                                        event.preventDefault();
+                                                        deleteTrack(track.id);
+                                                        }}>
+                <Icon name="delete_forever"/></a>
               </td>
             </tr>
           );
