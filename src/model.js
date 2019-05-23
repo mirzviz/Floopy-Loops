@@ -38,11 +38,20 @@ export function addTrack(tracks: Track[]) {
 }
 
 export function clearTrack(tracks: Track[], id: number, numOfBeats: number): Track[] {
+  console.log(tracks[id]);
   return tracks.map((track) => {
-    if (track.id !== id) {
+    if (track.id !== id) 
+    {
       return track;
-    } else {
-      return {...track, beats: initBeats(numOfBeats)};
+    } 
+    else 
+    {
+      let obj = {
+                  ...track, 
+                  beats: initBeats(numOfBeats)
+                };
+      console.log(obj.beats);
+      return obj;
     }
   });
 }

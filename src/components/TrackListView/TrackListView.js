@@ -50,25 +50,32 @@ import Pad from "../../containers/Pad/Pad";
                         myKey={beatIndex}
                         currBeat={currentBeat}
                         click={ (event) => {
-                                        toggleTrackBeat(track.id, beatIndex)}
-                                      }></Pad>
-
-                );})
+                                          toggleTrackBeat(track.id, beatIndex)
+                                          }
+                              }
+                    >
+                    </Pad>
+           );})
               }
               <td>
-                {track.beats.some(v => v) ? <a href="" title="Clear track" onClick={event => {
-                                                                          event.preventDefault();
-                                                                          clearTrack(track.id, trackLengths[track.id]);
-                                                                        }}>
-                                            <Icon name="delete"/>
-                                            </a> :
-                                            <Icon className="disabled-icon" name="delete"/>
+                  {
+                    track.beats.some(beat => beat) ? 
+                  <a href="" 
+                      title="Clear track" 
+                      onClick={event => {
+                                          event.preventDefault();
+                                          clearTrack(track.id, trackLengths[track.id]);
+                                        }}>
+                      <Icon name="delete"/>
+                      </a> :
+                      <Icon className="disabled-icon" name="delete"/>
                   }
-                <a href="" title="Delete track" onClick={event => {
-                                                        event.preventDefault();
-                                                        deleteTrack(track.id);
-                                                        }}>
-                <Icon name="delete_forever"/></a>
+                  <a href="" title="Delete track" onClick={event => {
+                                                          event.preventDefault();
+                                                          deleteTrack(track.id);
+                                                          }}
+                  >
+                  <Icon name="delete_forever"/></a>
               </td>
             </tr>
           );
