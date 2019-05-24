@@ -13,13 +13,30 @@
     width: 56px;
   }
 
-  .beat:nth-of-type(1),
-  .beat:nth-of-type(5),
-  .beat:nth-of-type(9),
-  .beat:nth-of-type(13) {
+
+  .beat3:nth-of-type(1),
+  .beat3:nth-of-type(4),
+  .beat3:nth-of-type(7),
+  .beat3:nth-of-type(10),
+  .beat3:nth-of-type(13) {
     border-left: 4px solid rgb(207, 188, 12);
   }
 
+  .beat4:nth-of-type(1),
+  .beat4:nth-of-type(5),
+  .beat4:nth-of-type(9),
+  .beat4:nth-of-type(13),
+  .beat4:nth-of-type(17) {
+    border-left: 4px solid rgb(207, 188, 12);
+  }
+
+  .beat5:nth-of-type(1),
+  .beat5:nth-of-type(6),
+  .beat5:nth-of-type(11),
+  .beat5:nth-of-type(16),
+  .beat5:nth-of-type(21) {
+    border-left: 4px solid rgb(207, 188, 12);
+  }
 
 
   

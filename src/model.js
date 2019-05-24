@@ -4,7 +4,7 @@ import type { Track, EncodedTrack } from "./types";
 import samples from "./samples.json";
 
 
-export function initTracks(numOfTracks: Number, trackLengths: Number[]): Track[] {
+export function initTracks(numOfTracks: Number, trackLengths: number): Track[] {
   // return [
   //   {id: 1, name: "hihat-reso", vol: .4, muted: false, beats: initBeats(4)},
   //   {id: 2, name: "hihat-plain", vol: .4, muted: false, beats: initBeats(16)},
@@ -14,7 +14,7 @@ export function initTracks(numOfTracks: Number, trackLengths: Number[]): Track[]
 
   const tracks = [];
   for(let i = 0; i < numOfTracks; i++){
-    tracks.push({id: i, name: "kick-electro01", vol: .5, muted: false, beats: initBeats(trackLengths[i])});
+    tracks.push({id: i, name: "kick-electro01", vol: .5, muted: false, beats: initBeats(trackLengths)});
   }
   
   return tracks

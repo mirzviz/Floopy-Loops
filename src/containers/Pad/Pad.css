@@ -1,24 +1,76 @@
-.beat {
+  /** -----------------------3--------------------**/
+
+.beat3 {
     background: #eee;
     text-align: center;
     line-height: 1em;
     border-radius: 0.1px;
   }
   
-  .beat.active {
+  .beat3.active {
     background: hsla(44, 56%, 29%, 0.897);
   }
   
-  .beat.current {
+  .beat3.current {
     background: #e2d4074f;
     animation: flip 0.66s ease-in reverse 1;
   }
   
-  .beat > a {
+  .beat3 > a {
     display: inline-block;
     width: 48px;
     height: 48px;
   }
+  
+  /** -----------------------4--------------------**/
+
+  .beat4 {
+    background: #eee;
+    text-align: center;
+    line-height: 1em;
+    border-radius: 0.1px;
+  }
+  
+  .beat4.active {
+    background: hsla(44, 56%, 29%, 0.897);
+  }
+  
+  .beat4.current {
+    background: #e2d4074f;
+    animation: flip 0.66s ease-in reverse 1;
+  }
+  
+  .bea4t > a {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+  }
+  
+  /** ----------------------5----------------------**/
+
+  .beat5 {
+    background: #eee;
+    text-align: center;
+    line-height: 1em;
+    border-radius: 0.1px;
+  }
+  
+  .beat5.active {
+    background: hsla(44, 56%, 29%, 0.897);
+  }
+  
+  .beat5.current {
+    background: #e2d4074f;
+    animation: flip 0.66s ease-in reverse 1;
+  }
+  
+  .beat5 > a {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+  }
+  
+  /** ---------------------------------------------**/
 
   .active.flip{
       animation: flip 0.2s ease-out alternate 1;
@@ -34,9 +86,7 @@
       }
   }
 
-  /* .beat:nth-of-type(3),
-  .beat:nth-of-type(7),
-  .beat:nth-of-type(11), */
+
 
 
   

@@ -40,7 +40,13 @@ export default class Pad extends PureComponent<Props, State>{
     }
     
     getClasses(){
-        let classes = `beat `;
+        let classes;
+        if(this.props.numberOfBeatsInABar === 3)
+            classes= `beat3 `;
+        if(this.props.numberOfBeatsInABar === 4)
+            classes= `beat4 `;
+        if(this.props.numberOfBeatsInABar === 5)
+            classes= `beat5 `;
 
         let str = ``; //= this.state.isCurrent ? `current` : this.state.active ? `active` : `` ;
         if(this.state.isCurrent === true){
@@ -79,6 +85,7 @@ export default class Pad extends PureComponent<Props, State>{
                                         this.onClick();
                                     }} 
                             >
+                                {classes}
                             </a>
                  </td>)
     }

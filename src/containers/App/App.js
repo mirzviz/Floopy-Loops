@@ -22,7 +22,8 @@ class App extends Component<Props, State> {
     tracks: Track[],
     shareHash: ?string,
     numOfTracks: number,
-    trackLengths: number[],
+    numOfBars: number,
+    numOfBeatsInABar: number
   };
 
   constructor(props: {}) {
@@ -58,11 +59,12 @@ class App extends Component<Props, State> {
       playing: true,
       currentBeat: -1,
       shareHash: null,
-      numOfTracks: 5,
-      trackLengths: [16,16,16,16,16],
-      tracks: model.initTracks(5, [16,16,16,16,16]),
+      numOfTracks: 4,
+      numOfBars: 3,
+      numOfBeatsInABar: 3,
+      tracks: model.initTracks(4, 9)
     };
-    this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat);
+    this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar);
     sequencer.updateBPM(this.state.bpm);
     //this.start();
   }
@@ -149,15 +151,25 @@ class App extends Component<Props, State> {
     this.setState({shareHash});
   };
 
+  updateNumberOfBars = (newNumOfBars) => {
+    console.log(newNumOfBars);
+    this.setState({
+      numOfBars: newNumOfBars,
+      tracks: model.initTracks(this.state.numOfTracks, newNumOfBars * this.state.numOfBeatsInABar)
+    });
+    this.loop = sequencer.update(this.state.tracks, this.state.tracks, this.updateCurrentBeat);
+  }
+
   render() {
-    const {bpm, currentBeat, playing, shareHash, tracks, trackLengths, numOfTracks} = this.state;
-    const {updateBPM, start, stop, addTrack, share, randomSong, closeDialog} = this;
+    const {bpm, currentBeat, playing, shareHash, tracks, trackLengths, numOfTracks, numOfBars, numOfBeatsInABar} = this.state;
+    const {updateBPM, start, stop, addTrack, share, randomSong, closeDialog, updateNumberOfBars} = this;
     return (
       <div className="app">
         <h3 className="header">Floopy Loops</h3>
         {
           shareHash ? <ShareDialog hash={shareHash} closeDialog={closeDialog} /> : null
         }
+        
         <table>
           <TrackListView
             tracks={tracks}
@@ -168,10 +180,13 @@ class App extends Component<Props, State> {
             muteTrack={this.muteTrack}
             randomSong={this.randomSong}
             numOfTracks={this.numOfTracks}
-            trackLengths={trackLengths}
+            //trackLengths={trackLengths}
             clearTrack={this.clearTrack}
-            deleteTrack={this.deleteTrack} />
-          <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share}} />
+            deleteTrack={this.deleteTrack} 
+            numOfBars = {this.state.numOfBars}
+            numOfBeatsInABar = { this.state.numOfBeatsInABar}
+            />
+          <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share, numOfBars, numOfBeatsInABar, updateNumberOfBars}} />
         </table>
       </div>
     );

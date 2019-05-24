@@ -21,9 +21,11 @@ import Pad from "../../containers/Pad/Pad";
                             muteTrack,
                             randomSong,
                             numOfTracks,
-                            trackLengths,
+                            //trackLengths,
                             clearTrack,
-                            deleteTrack
+                            deleteTrack,
+                            numOfBars,
+                            numOfBeatsInABar,
                           }) => 
     {
     return (
@@ -45,6 +47,7 @@ import Pad from "../../containers/Pad/Pad";
                                           toggleTrackBeat(track.id, beatIndex)
                                           }
                               }
+                        numberOfBeatsInABar={numOfBeatsInABar}
                     >
                     </Pad>
            );})
@@ -67,7 +70,7 @@ import Pad from "../../containers/Pad/Pad";
                       title="Clear track" 
                       onClick={event => {
                                           event.preventDefault();
-                                          clearTrack(track.id, trackLengths[track.id]);
+                                          clearTrack(track.id, numOfBars * numOfBeatsInABar);
                                         }}>
                       <Icon name="delete"/>
                       </a> :

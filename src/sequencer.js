@@ -11,7 +11,7 @@ const velocities = [
   1, .5, .75, .5,
 ];
 
-export function create(tracks: Track[], beatNotifier: BeatNotifier): Tone.Sequence {
+export function create(tracks: Track[], beatNotifier: BeatNotifier, numOfPadsInATrack: number, newBpm: number): Tone.Sequence {
   const loop = new Tone.Sequence(
     loopProcessor(tracks, beatNotifier),
     new Array(16).fill(0).map((_, i) => i),
@@ -28,6 +28,10 @@ export function update(loop: Tone.Sequence, tracks: Track[], beatNotifier: BeatN
   loop.callback = loopProcessor(tracks, beatNotifier);
   return loop;
 }
+
+// export function updateToneSequence(tracks: Track[], beatNotifier: BeatNotifier, numOfPadsInATrack: number): Tone.Sequence {
+
+// }
 
 export function updateBPM(bpm: number): void {
   Tone.Transport.bpm.value = bpm;
