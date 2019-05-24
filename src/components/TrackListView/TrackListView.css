@@ -1,11 +1,6 @@
-.chooseBeat {
-    text-decoration: none;
-    color: #b5b88a;
-    font-weight: bold;
-  }
-  
+
   .track th {
-    text-align: left;
+    text-align: center;
     width: 100px; 
   }
   
@@ -16,6 +11,13 @@
   
   .track .mute {
     width: 56px;
+  }
+
+  .beat:nth-of-type(1),
+  .beat:nth-of-type(5),
+  .beat:nth-of-type(9),
+  .beat:nth-of-type(13) {
+    border-left: 4px solid rgb(207, 188, 12);
   }
 
 

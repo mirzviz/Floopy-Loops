@@ -31,16 +31,8 @@ import Pad from "../../containers/Pad/Pad";
         tracks.map((track, i) => {
           return (
             <tr key={i} className="track">
-              <th>
-                <SampleSelector id={track.id} current={track.name} onChange={updateTrackSample} />
-              </th>
-              <td className="vol">
-                <Slider min={0} max={1} step={.1} value={track.vol}
-                  onChange={event => setTrackVolume(track.id, parseFloat(event.target.value))} />
-              </td>
-              <td className="mute">
-                <Switch defaultChecked={!track.muted} onChange={event => muteTrack(track.id)} />
-              </td>
+              <th>{i}</th>
+              
               {
                 track.beats.map((beat, beatIndex) => {
       
@@ -57,6 +49,17 @@ import Pad from "../../containers/Pad/Pad";
                     </Pad>
            );})
               }
+              <td>
+                <SampleSelector id={track.id} current={track.name} onChange={updateTrackSample} />
+              </td>
+              <td className="vol">
+                <Slider min={0} max={1} step={.1} value={track.vol}
+                  onChange={event => setTrackVolume(track.id, parseFloat(event.target.value))} />
+              </td>
+              <td className="mute">
+                <Switch defaultChecked={!track.muted} onChange={event => muteTrack(track.id)} />
+              </td>
+
               <td>
                   {
                     track.beats.some(beat => beat) ? 
@@ -77,6 +80,7 @@ import Pad from "../../containers/Pad/Pad";
                   >
                   <Icon name="delete_forever"/></a>
               </td>
+
             </tr>
           );
         })

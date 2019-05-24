@@ -14,13 +14,6 @@
     animation: flip 0.66s ease-in reverse 1;
   }
   
-  .beat:nth-of-type(3),
-  .beat:nth-of-type(7),
-  .beat:nth-of-type(11),
-  .beat:nth-of-type(15) {
-    border-left: 4px solid rgb(207, 188, 12);
-  }
-  
   .beat > a {
     display: inline-block;
     width: 48px;
@@ -40,3 +33,10 @@
           transform: rotateY(180deg);
       }
   }
+
+  /* .beat:nth-of-type(3),
+  .beat:nth-of-type(7),
+  .beat:nth-of-type(11), */
+
+
+  
