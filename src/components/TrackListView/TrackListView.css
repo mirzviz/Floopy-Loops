@@ -19,7 +19,7 @@
   .beat3:nth-of-type(7),
   .beat3:nth-of-type(10),
   .beat3:nth-of-type(13) {
-    border-left: 4px solid rgb(207, 188, 12);
+    border-left: 2px solid rgb(207, 188, 12);
   }
 
   .beat4:nth-of-type(1),

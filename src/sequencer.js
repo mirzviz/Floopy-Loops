@@ -14,11 +14,11 @@ const velocities = [
 export function create(tracks: Track[], beatNotifier: BeatNotifier, numOfPadsInATrack: number, newBpm: number): Tone.Sequence {
   const loop = new Tone.Sequence(
     loopProcessor(tracks, beatNotifier),
-    new Array(16).fill(0).map((_, i) => i),
+    new Array(numOfPadsInATrack).fill(0).map((_, i) => i),
     "16n"
   );
 
-  Tone.Transport.bpm.value = 120;
+  Tone.Transport.bpm.value = newBpm;
   Tone.Transport.start();
 
   return loop;

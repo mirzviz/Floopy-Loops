@@ -21,7 +21,6 @@ import Pad from "../../containers/Pad/Pad";
                             muteTrack,
                             randomSong,
                             numOfTracks,
-                            //trackLengths,
                             clearTrack,
                             deleteTrack,
                             numOfBars,

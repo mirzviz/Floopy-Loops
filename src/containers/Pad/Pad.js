@@ -79,13 +79,13 @@ export default class Pad extends PureComponent<Props, State>{
         return(<td 
                     className={`${classes}`}
                 >
-                            <a href="" 
+                            <a className="fullsize" href="" 
                                     onClick={(event) => {
                                         event.preventDefault(); 
                                         this.onClick();
                                     }} 
                             >
-                                {classes}
+                              
                             </a>
                  </td>)
     }

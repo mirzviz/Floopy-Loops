@@ -56,25 +56,30 @@ class App extends Component<Props, State> {
   initializeState() {
     this.state = {
       bpm: 120,
-      playing: true,
+      playing: false,
       currentBeat: -1,
       shareHash: null,
       numOfTracks: 4,
-      numOfBars: 3,
-      numOfBeatsInABar: 3,
-      tracks: model.initTracks(4, 9)
+      numOfBars: 2,
+      numOfBeatsInABar: 5,
+      tracks: model.initTracks(4, 10)
     };
-    this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar);
-    sequencer.updateBPM(this.state.bpm);
+    // this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar, this.state.bpm);
+    // sequencer.updateBPM(this.state.bpm);
     //this.start();
   }
 
   componentDidMount(){
-    this.start();
+    
   }
 
   start = () => {
+    var context = new AudioContext();
     this.setState({playing: true});
+    if(!this.loop){
+      this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar, this.state.bpm);
+      sequencer.updateBPM(this.state.bpm);
+    }
     this.loop.start();
   };
   
@@ -88,8 +93,10 @@ class App extends Component<Props, State> {
   };
 
   updateTracks = (newTracks: Track[]) => {
-    this.loop = sequencer.update(this.loop, newTracks, this.updateCurrentBeat);
-    this.setState({tracks: newTracks});
+    if(this.loop){
+      this.loop = sequencer.update(this.loop, newTracks, this.updateCurrentBeat);
+      this.setState({tracks: newTracks});
+    }
   };
 
   addTrack = () => {
@@ -169,7 +176,7 @@ class App extends Component<Props, State> {
         {
           shareHash ? <ShareDialog hash={shareHash} closeDialog={closeDialog} /> : null
         }
-        
+
         <table>
           <TrackListView
             tracks={tracks}
@@ -180,7 +187,6 @@ class App extends Component<Props, State> {
             muteTrack={this.muteTrack}
             randomSong={this.randomSong}
             numOfTracks={this.numOfTracks}
-            //trackLengths={trackLengths}
             clearTrack={this.clearTrack}
             deleteTrack={this.deleteTrack} 
             numOfBars = {this.state.numOfBars}
