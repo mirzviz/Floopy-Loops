@@ -28,27 +28,6 @@ class App extends Component<Props, State> {
 
   constructor(props: {}) {
     super(props);
-    const hash = location.hash.substr(1);
-    if (hash.length > 0) {
-      try {
-        const {bpm, tracks}: {
-          bpm: number,
-          tracks: EncodedTrack[],
-        } = JSON.parse(atob(hash));
-        this.initializeState({
-          bpm,
-          tracks: model.decodeTracks(tracks),
-        });
-      } catch(e) {
-        console.warn("Unable to parse hash", hash, e);
-        console.log("in catch befor initalizeState");
-        this.initializeState({tracks: model.initTracks()});
-      } finally {
-        location.hash = "";
-      }
-    } else {
-      this.initializeState();
-    }
 
     this.initializeState();
   }
@@ -66,7 +45,6 @@ class App extends Component<Props, State> {
     };
     // this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar, this.state.bpm);
     // sequencer.updateBPM(this.state.bpm);
-    //this.start();
   }
 
   componentDidMount(){
@@ -74,16 +52,20 @@ class App extends Component<Props, State> {
   }
 
   start = () => {
+    console.log(this.state.tracks);
     var context = new AudioContext();
-    this.setState({playing: true});
-    if(!this.loop){
-      this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar, this.state.bpm);
-      sequencer.updateBPM(this.state.bpm);
-    }
-    this.loop.start();
+    this.setState({
+      playing: true,
+      tracks: model.updateTracks(this.state.tracks, this.state.numOfTracks, this.state.numOfBars * this.state.numOfBeatsInABar)
+    }, () => {
+        this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar, this.state.bpm);
+        sequencer.updateBPM(this.state.bpm);
+        this.loop.start();
+    });
   };
   
   stop = () => {
+    console.log(this.state.tracks);
     this.loop.stop();
     this.setState({currentBeat: -1, playing: false});
   };
@@ -95,9 +77,9 @@ class App extends Component<Props, State> {
   updateTracks = (newTracks: Track[]) => {
     if(this.loop){
       this.loop = sequencer.update(this.loop, newTracks, this.updateCurrentBeat);
-      this.setState({tracks: newTracks});
     }
-  };
+    this.setState({tracks: newTracks});
+  }
 
   addTrack = () => {
     const {tracks} = this.state;
@@ -115,8 +97,9 @@ class App extends Component<Props, State> {
   };
 
   toggleTrackBeat = (id: number, beat: number) => {
-    const {tracks} = this.state;
-    this.updateTracks(model.toggleTrackBeat(tracks, id, beat));
+    const oldTracks = this.state.tracks;
+    let newTracks = model.toggleTrackBeat(oldTracks, id, beat);
+    this.updateTracks(newTracks);
   };
 
   setTrackVolume = (id: number, vol: number) => {
@@ -158,14 +141,14 @@ class App extends Component<Props, State> {
     this.setState({shareHash});
   };
 
-  updateNumberOfBars = (newNumOfBars) => {
-    console.log(newNumOfBars);
-    this.setState({
-      numOfBars: newNumOfBars,
-      tracks: model.initTracks(this.state.numOfTracks, newNumOfBars * this.state.numOfBeatsInABar)
-    });
-    this.loop = sequencer.update(this.state.tracks, this.state.tracks, this.updateCurrentBeat);
-  }
+  // updateNumberOfBars = (newNumOfBars) => {
+  //   console.log(newNumOfBars);
+  //   this.stop();
+  //   this.setState({
+  //     numOfBars: newNumOfBars,
+  //     tracks: model.initTracks(this.state.numOfTracks, newNumOfBars * this.state.numOfBeatsInABar)
+  //   });
+  // };
 
   render() {
     const {bpm, currentBeat, playing, shareHash, tracks, trackLengths, numOfTracks, numOfBars, numOfBeatsInABar} = this.state;

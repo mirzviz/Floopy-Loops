@@ -24,7 +24,8 @@ export function create(tracks: Track[], beatNotifier: BeatNotifier, numOfPadsInA
   return loop;
 }
 
-export function update(loop: Tone.Sequence, tracks: Track[], beatNotifier: BeatNotifier): Tone.Sequence {
+export function update(loop: Tone.Sequence, tracks: Track[], beatNotifier: BeatNotifier, numOfPadsInATrack: number): Tone.Sequence {
+
   loop.callback = loopProcessor(tracks, beatNotifier);
   return loop;
 }
