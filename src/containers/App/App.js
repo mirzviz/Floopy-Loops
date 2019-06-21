@@ -56,7 +56,7 @@ class App extends Component<Props, State> {
     var context = new AudioContext();
     this.setState({
       playing: true,
-      tracks: model.updateTracks(this.state.tracks, this.state.numOfTracks, this.state.numOfBars * this.state.numOfBeatsInABar)
+      //tracks: model.updateTracksLength(this.state.tracks, this.state.numOfBars * this.state.numOfBeatsInABar)
     }, () => {
         this.loop = sequencer.create(this.state.tracks, this.updateCurrentBeat, this.state.numOfBars * this.state.numOfBeatsInABar, this.state.bpm);
         sequencer.updateBPM(this.state.bpm);
@@ -97,8 +97,9 @@ class App extends Component<Props, State> {
   };
 
   toggleTrackBeat = (id: number, beat: number) => {
-    const oldTracks = this.state.tracks;
-    let newTracks = model.toggleTrackBeat(oldTracks, id, beat);
+    console.log("old", this.state.tracks);
+    let newTracks = model.toggleTrackBeat(this.state.tracks, id, beat);
+    console.log("new", newTracks);
     this.updateTracks(newTracks);
   };
 
@@ -141,18 +142,36 @@ class App extends Component<Props, State> {
     this.setState({shareHash});
   };
 
-  // updateNumberOfBars = (newNumOfBars) => {
-  //   console.log(newNumOfBars);
-  //   this.stop();
-  //   this.setState({
-  //     numOfBars: newNumOfBars,
-  //     tracks: model.initTracks(this.state.numOfTracks, newNumOfBars * this.state.numOfBeatsInABar)
-  //   });
-  // };
+  updateNumberOfBars = (newNumOfBars) => {
+    let playing = this.state.playing;
+    if(playing)
+      this.stop();
+    this.setState({
+      numOfBars: newNumOfBars,
+      tracks: model.updateTracksLength(this.state.tracks, newNumOfBars * this.state.numOfBeatsInABar)
+    }, () =>{     
+        if(playing)
+          this.start();
+    })
+  };
+
+  updateNumberOfBeatsInABar = (newNumOfBeatsInABar) => {
+    let playing = this.state.playing;
+    if(playing)
+      this.stop();
+    this.setState({
+      numOfBeatsInABar: newNumOfBeatsInABar,
+      tracks: model.updateTracksLength(this.state.tracks, this.state.numOfBars * newNumOfBeatsInABar)
+    }, ()=>{
+      if(playing)
+        this.start();
+    })
+  };
 
   render() {
     const {bpm, currentBeat, playing, shareHash, tracks, trackLengths, numOfTracks, numOfBars, numOfBeatsInABar} = this.state;
-    const {updateBPM, start, stop, addTrack, share, randomSong, closeDialog, updateNumberOfBars} = this;
+          <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share, numOfBars, numOfBeatsInABar, updateNumberOfBars, updateNumberOfBeatsInABar}} />
+    const {updateBPM, start, stop, addTrack, share, randomSong, closeDialog, updateNumberOfBars, updateNumberOfBeatsInABar} = this;
     return (
       <div className="app">
         <h3 className="header">Floopy Loops</h3>
@@ -175,7 +194,7 @@ class App extends Component<Props, State> {
             numOfBars = {this.state.numOfBars}
             numOfBeatsInABar = { this.state.numOfBeatsInABar}
             />
-          <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share, numOfBars, numOfBeatsInABar, updateNumberOfBars}} />
+          <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share, numOfBars, numOfBeatsInABar, updateNumberOfBars, updateNumberOfBeatsInABar}} />
         </table>
       </div>
     );

@@ -5,28 +5,44 @@ import samples from "./samples.json";
 
 
 export function initTracks(numOfTracks: Number, trackLengths: number): Track[] {
-  console.log("in initTracks the cursed");
   const tracks = [];
   for(let i = 0; i < numOfTracks; i++){
-    console.log("init beats of track: ", i);
     tracks[i] = {
       id: i, 
-      name: "kick-electro01", 
+      name: null, 
       vol: .5, 
       muted: false, 
       beats: initBeats(trackLengths)
     };
   }
+  tracks[0].name = "kick-electro01";
+  tracks[1].name = "hihat-plain";
+  tracks[2].name = "snare-808";
+  tracks[3].name = "perc-hollow";
   
   return tracks;
 }
 
-export function updateTracks(i_Tracks: Track[], numOfTracks: Number, trackLengths: number): Track[] {
-  const newTracks = [...i_Tracks];
+export function updateTracksLength(i_Tracks: Track[], newTrackLengths: number): Track[] {
+  let newTracks;
+  let oldTrackLengths = i_Tracks[0].beats.length;
+  if(oldTrackLengths > newTrackLengths){
+    newTracks = i_Tracks.map(track => { return {
+                                          ...track,
+                                          beats: new Array(newTrackLengths)
+                                        }
+                                      });
+  }
+  else{
+    newTracks = [...i_Tracks];
+  }
+
   newTracks.forEach((track, trackIndex) => {
-    track.beats.map((beat, index) => index < trackLengths ? i_Tracks[trackIndex].beats[index] : false);
+    for(let i = 0; i < newTrackLengths; i++){
+      track.beats[i] = i < oldTrackLengths ? i_Tracks[trackIndex].beats[i] : false ;
+    }
   })
-  
+
   return newTracks;
 }
 
@@ -54,7 +70,6 @@ export function addTrack(tracks: Track[]) {
 }
 
 export function clearTrack(tracks: Track[], id: number, numOfBeats: number): Track[] {
-  console.log(tracks[id]);
   return tracks.map((track) => {
     if (track.id !== id) 
     {

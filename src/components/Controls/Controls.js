@@ -5,8 +5,8 @@ import "./Controls.css";
 
 const Controls =({bpm, updateBPM, playing, 
                     start, stop, addTrack, share, numOfBars, numOfBeatsInABar,
-                    updateNumberOfBars}) => {
-
+                    updateNumberOfBars, updateNumberOfBeatsInABar}) => {
+                       
     
     return (
       <tfoot className="controls">
@@ -64,14 +64,33 @@ const Controls =({bpm, updateBPM, playing,
                     value={numOfBars} 
                     onChange={event => updateNumberOfBars(parseInt(event.target.value, 10))} 
                   />
-                    BPM
+                  Number Of Bars
               </td>
               <td colSpan="13">
                   <Slider 
                     min={1} 
-                    max={5} 
+                    max={20} 
                     value={numOfBars} 
                     onChange={event => updateNumberOfBars(parseInt(event.target.value, 10))} 
+                  />
+              </td>
+        </tr>
+
+        <tr>
+        <td colSpan="2" className="bpm">
+                  <input 
+                    type="number" 
+                    value={numOfBeatsInABar} 
+                    onChange={event => updateNumberOfBeatsInABar(parseInt(event.target.value, 10))} 
+                  />
+                  Number of beats in a bar
+              </td>
+              <td colSpan="13">
+                  <Slider 
+                    min={3} 
+                    max={5} 
+                    value={numOfBeatsInABar} 
+                    onChange={event => updateNumberOfBeatsInABar(parseInt(event.target.value, 10))} 
                   />
               </td>
         </tr>
