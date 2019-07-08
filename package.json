@@ -11,6 +11,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "rc-input-number": "^4.4.5",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-mdl": "^1.7.2",

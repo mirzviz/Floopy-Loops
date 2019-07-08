@@ -4,11 +4,17 @@ import type { Track, BeatNotifier } from "./types";
 import Tone from "tone";
 
 
+// const velocities = [
+//   1, .5, .75, .5,
+//   1, .5, .75, .5,
+//   1, .5, .75, .5,
+//   1, .5, .75, .5,
+// ];
 const velocities = [
-  1, .5, .75, .5,
-  1, .5, .75, .5,
-  1, .5, .75, .5,
-  1, .5, .75, .5,
+  1, 1, 1, 1,
+  1, 1, 1, 1,
+  1, 1, 1, 1,
+  1, 1, 1, 1,
 ];
 
 export function create(tracks: Track[], beatNotifier: BeatNotifier, numOfPadsInATrack: number, newBpm: number): Tone.Sequence {
