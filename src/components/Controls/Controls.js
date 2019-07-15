@@ -11,9 +11,16 @@ const Controls =({bpm, updateBPM, playing,
                        
     
     return (
-      <tfoot className="controls">
-        <tr>
-          <td style={{textAlign: "right"}}>
+            <span>
+              <input 
+                type="number" 
+                value={bpm} 
+                onChange={event => updateBPM(parseInt(event.target.value, 10))} 
+              />
+            <span>BMP</span>
+
+
+          <span >
               <FABButton 
                 ripple 
                 onClick={addTrack} 
@@ -21,48 +28,30 @@ const Controls =({bpm, updateBPM, playing,
               >
                   <Icon name="add" />
               </FABButton>
-          </td>
+          </span>
 
-          <td />
 
-          <td>
+          <span>
               <FABButton ripple onClick={playing ? stop : start}>
                  <Icon name={playing ? "stop" : "play_arrow"} />
               </FABButton>
-          </td>
+          </span>
 
-          <td colSpan="2" className="bpm">
-              <input 
-                type="number" 
-                value={bpm} 
-                onChange={event => updateBPM(parseInt(event.target.value, 10))} 
-              />
-                BPM
-          </td>
-          <td colSpan="13">
-              <Slider 
-                min={30} 
-                max={240} 
-                value={bpm} 
-                onChange={event => updateBPM(parseInt(event.target.value, 10))} 
-              />
-          </td>
 
-          <td colSpan="2">
+
+          <span >
               <FABButton 
                 onClick={share} 
                 title="Share"
               >
                   <Icon name="share" />
               </FABButton>
-          </td>
+          </span>
       
-        </tr>
-
-        <tr>
-            <td colSpan="2" className="bpm">
-                <span>
-                 <span>BARS:</span>
+    
+        <span>
+            <span>
+                  <span>BARS:</span>
                   <span>
                     <input 
                     type="number" 
@@ -72,20 +61,12 @@ const Controls =({bpm, updateBPM, playing,
                     onChange={event => updateNumberOfBars(parseInt(event.target.value, 10))} 
                     />
                   </span>
-                </span>
-            </td>
-            <td colSpan="13">
-                  <Slider 
-                    min={1} 
-                    max={20} 
-                    value={numOfBars} 
-                    onChange={event => updateNumberOfBars(parseInt(event.target.value, 10))} 
-                  />
-            </td>
-        </tr>
+            </span>
 
-        <tr>
-              <td colSpan="2" className="bpm">
+          </span>
+
+        <span>
+              <span>
                   <span>BEATS IN A BAR:</span>
                   <input  
                     type="number" 
@@ -95,19 +76,11 @@ const Controls =({bpm, updateBPM, playing,
                     value={numOfBeatsInABar} 
                     onChange={event => updateNumberOfBeatsInABar(parseInt(event.target.value, 10))} 
                   />
-                  
-              </td>
-              <td colSpan="13">
-                  <Slider 
-                    min={3} 
-                    max={5} 
-                    value={numOfBeatsInABar} 
-                    onChange={event => updateNumberOfBeatsInABar(parseInt(event.target.value, 10))} 
-                  />
-              </td>
-        </tr>
+              </span>
 
-      </tfoot>
+        </span>
+    </span>
+      
     );
   }
 
