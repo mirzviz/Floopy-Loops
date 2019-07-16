@@ -11,7 +11,7 @@ const Controls =({bpm, updateBPM, playing,
                        
     
     return (
-            <span>
+            <span className="container">
                   <FABButton 
                     ripple 
                     onClick={addTrack} 
@@ -31,7 +31,7 @@ const Controls =({bpm, updateBPM, playing,
                       <Icon name="share" />
                   </FABButton>
 
-                  <span>bpm</span>
+                  <span>bpm:</span>
                   <input 
                     type="number" 
                     value={bpm} 
@@ -57,7 +57,6 @@ const Controls =({bpm, updateBPM, playing,
                     onChange={event => updateNumberOfBeatsInABar(parseInt(event.target.value, 10))} 
                   />
             </span>
-      
     );
   }
 

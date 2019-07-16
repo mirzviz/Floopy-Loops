@@ -172,30 +172,29 @@ class App extends Component<Props, State> {
     const {bpm, currentBeat, playing, shareHash, tracks, trackLengths, numOfTracks, numOfBars, numOfBeatsInABar} = this.state;
           <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share, numOfBars, numOfBeatsInABar, updateNumberOfBars, updateNumberOfBeatsInABar}} />
     const {updateBPM, start, stop, addTrack, share, randomSong, closeDialog, updateNumberOfBars, updateNumberOfBeatsInABar} = this;
+
+    //----------------------------------RETURN----------------------
     return (
       <div className="app">
         <h3 className="header">Floopy Loops</h3>
         {
           shareHash ? <ShareDialog hash={shareHash} closeDialog={closeDialog} /> : null
         }
-
-        <table>
-          <TrackListView
-            tracks={tracks}
-            currentBeat={currentBeat}
-            toggleTrackBeat={this.toggleTrackBeat}
-            setTrackVolume={this.setTrackVolume}
-            updateTrackSample={this.updateTrackSample}
-            muteTrack={this.muteTrack}
-            randomSong={this.randomSong}
-            numOfTracks={this.numOfTracks}
-            clearTrack={this.clearTrack}
-            deleteTrack={this.deleteTrack} 
-            numOfBars = {this.state.numOfBars}
-            numOfBeatsInABar = { this.state.numOfBeatsInABar}
-            />
-          <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share, numOfBars, numOfBeatsInABar, updateNumberOfBars, updateNumberOfBeatsInABar}} />
-        </table>
+        <Controls {...{bpm, updateBPM, playing, start, stop, addTrack, share, numOfBars, numOfBeatsInABar, updateNumberOfBars, updateNumberOfBeatsInABar}} />
+        <TrackListView
+          tracks={tracks}
+          currentBeat={currentBeat}
+          toggleTrackBeat={this.toggleTrackBeat}
+          setTrackVolume={this.setTrackVolume}
+          updateTrackSample={this.updateTrackSample}
+          muteTrack={this.muteTrack}
+          randomSong={this.randomSong}
+          numOfTracks={this.numOfTracks}
+          clearTrack={this.clearTrack}
+          deleteTrack={this.deleteTrack} 
+          numOfBars = {this.state.numOfBars}
+          numOfBeatsInABar = { this.state.numOfBeatsInABar}
+        />
       </div>
     );
   }

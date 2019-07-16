@@ -1,4 +1,8 @@
-  
+  table{
+    display:table;
+    width:100%;
+    table-layout:fixed;
+  }
 
   .track th {
     text-align: center;

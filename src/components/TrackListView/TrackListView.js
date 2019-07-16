@@ -28,6 +28,7 @@ import Pad from "../../containers/Pad/Pad";
                           }) => 
     {
     return (
+      <table>
       <tbody>{
         tracks.map((track, i) => {
           return (
@@ -87,6 +88,7 @@ import Pad from "../../containers/Pad/Pad";
           );
         })
       }</tbody>
+      </table>
     );
   }
 

@@ -19,11 +19,7 @@
   font-family: Helvetica, Arial, Helvetica, sans-serif;
 }
 
-table{
-  display:table;
-  width:100%;
-  table-layout:fixed;
-}
+
 
 td{
   display:table-cell;
