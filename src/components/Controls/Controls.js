@@ -12,62 +12,42 @@ const Controls =({bpm, updateBPM, playing,
     
     return (
             <span>
-              <input 
-                type="number" 
-                value={bpm} 
-                onChange={event => updateBPM(parseInt(event.target.value, 10))} 
-              />
-            <span>BMP</span>
+                  <FABButton 
+                    ripple 
+                    onClick={addTrack} 
+                    title="Add new track"
+                  >
+                      <Icon name="add" />
+                  </FABButton>
 
+                  <FABButton ripple onClick={playing ? stop : start}>
+                      <Icon name={playing ? "stop" : "play_arrow"} />
+                  </FABButton>
+          
+                  <FABButton 
+                    onClick={share} 
+                    title="Share"
+                  >
+                      <Icon name="share" />
+                  </FABButton>
 
-          <span >
-              <FABButton 
-                ripple 
-                onClick={addTrack} 
-                title="Add new track"
-              >
-                  <Icon name="add" />
-              </FABButton>
-          </span>
-
-
-          <span>
-              <FABButton ripple onClick={playing ? stop : start}>
-                 <Icon name={playing ? "stop" : "play_arrow"} />
-              </FABButton>
-          </span>
-
-
-
-          <span >
-              <FABButton 
-                onClick={share} 
-                title="Share"
-              >
-                  <Icon name="share" />
-              </FABButton>
-          </span>
+                  <span>bpm</span>
+                  <input 
+                    type="number" 
+                    value={bpm} 
+                    onChange={event => updateBPM(parseInt(event.target.value, 10))} 
+                  />
       
-    
-        <span>
-            <span>
-                  <span>BARS:</span>
-                  <span>
-                    <input 
+                  <span>bars:</span>
+                  <input 
                     type="number" 
                     min={1} 
                     max={20} 
                     value={numOfBars} 
                     onChange={event => updateNumberOfBars(parseInt(event.target.value, 10))} 
-                    />
-                  </span>
-            </span>
+                  />
 
-          </span>
-
-        <span>
-              <span>
-                  <span>BEATS IN A BAR:</span>
+                  <span>beats per bar:</span>
                   <input  
                     type="number" 
                     min={3} 
@@ -76,10 +56,7 @@ const Controls =({bpm, updateBPM, playing,
                     value={numOfBeatsInABar} 
                     onChange={event => updateNumberOfBeatsInABar(parseInt(event.target.value, 10))} 
                   />
-              </span>
-
-        </span>
-    </span>
+            </span>
       
     );
   }

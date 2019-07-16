@@ -1,21 +1,26 @@
-td{
-  width: 70px;
-  height: 70px;
-}
+  td{
+    width: 70px;
+    height: 70px;
+  }
+  
  .controls td {
     padding-top: .5em;
   }
-  
+
   span{
     display: inline-flex;
     padding: 10px 20px;
   }
 
-  .bpm input {
+  span > input {
     display: inline-block;
     width: 60px;
     border: 0;
     font-size: 1.8em;
+  }
+
+  span > span {
+    font-size: 1.7em;
   }
   
   .material-icons.disabled-icon {
