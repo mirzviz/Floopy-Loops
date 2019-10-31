@@ -1,5 +1,4 @@
 import TrackListView from '../../components/TrackListView/TrackListView'
-import type { Track, EncodedTrack } from "../../types.js";
 import Tone from "tone";
 import React, { Component } from "react";
 import { Button,Dialog,DialogActions,DialogContent,DialogTitle,
@@ -13,20 +12,20 @@ import samples from "../../samples.json";
 import Controls from '../../components/Controls/Controls';
 import ShareDialog from '../../components/ShareDialog/ShareDialog'
 
-class App extends Component<Props, State> {
-  loop: Tone.Sequence;
-  state: {
-    bpm: number,
-    currentBeat: number,
-    playing: boolean,
-    tracks: Track[],
-    shareHash: ?string,
-    numOfTracks: number,
-    numOfBars: number,
-    numOfBeatsInABar: number
-  };
+class App extends Component{
+  // loop: Tone.Sequence;
+  // state: {
+  //   bpm: number,
+  //   currentBeat: number,
+  //   playing: boolean,
+  //   tracks: Track[],
+  //   shareHash: ?string,
+  //   numOfTracks: number,
+  //   numOfBars: number,
+  //   numOfBeatsInABar: number
+  // };
 
-  constructor(props: {}) {
+  constructor(props) {
     super(props);
 
     this.initializeState();
@@ -70,11 +69,11 @@ class App extends Component<Props, State> {
     this.setState({currentBeat: -1, playing: false});
   };
 
-  updateCurrentBeat = (beat: number): void => {
+  updateCurrentBeat = (beat) => {
     this.setState({currentBeat: beat});
   };
 
-  updateTracks = (newTracks: Track[]) => {
+  updateTracks = (newTracks) => {
     if(this.loop){
       this.loop = sequencer.update(this.loop, newTracks, this.updateCurrentBeat);
     }
@@ -86,39 +85,39 @@ class App extends Component<Props, State> {
     this.updateTracks(model.addTrack(tracks));
   };
 
-  clearTrack = (id: number,  numOfBeats: number) => {
+  clearTrack = (id,  numOfBeats) => {
     const {tracks} = this.state;
     this.updateTracks(model.clearTrack(tracks, id, numOfBeats));
   };
 
-  deleteTrack = (id: number) => {
+  deleteTrack = (id) => {
     const {tracks} = this.state;
     this.updateTracks(model.deleteTracks(tracks, id));
   };
 
-  toggleTrackBeat = (id: number, beat: number) => {
+  toggleTrackBeat = (id, beat) => {
     console.log("old", this.state.tracks);
     let newTracks = model.toggleTrackBeat(this.state.tracks, id, beat);
     console.log("new", newTracks);
     this.updateTracks(newTracks);
   };
 
-  setTrackVolume = (id: number, vol: number) => {
+  setTrackVolume = (id, vol) => {
     const {tracks} = this.state;
     this.updateTracks(model.setTrackVolume(tracks, id, vol));
   };
 
-  muteTrack = (id: number) => {
+  muteTrack = (id) => {
     const {tracks} = this.state;
     this.updateTracks(model.muteTrack(tracks, id));
   };
 
-  updateBPM = (newBpm: number) => {
+  updateBPM = (newBpm) => {
     sequencer.updateBPM(newBpm);
     this.setState({bpm: newBpm});
   };
 
-  updateTrackSample = (id: number, sample: string) => {
+  updateTrackSample = (id, sample) => {
     const {tracks} = this.state;
     this.updateTracks(model.updateTrackSample(tracks, id, sample));
   };

@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import "./Pad.css";
 
-export default class Pad extends PureComponent<Props, State>{
+export default class Pad extends PureComponent{
     constructor(props) {
         super(props);
         this.state = {

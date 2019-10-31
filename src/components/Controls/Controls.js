@@ -52,7 +52,6 @@ const Controls =({bpm, updateBPM, playing,
                     type="number" 
                     min={3} 
                     max={5} 
-                    defaultValue= {5}
                     value={numOfBeatsInABar} 
                     onChange={event => updateNumberOfBeatsInABar(parseInt(event.target.value, 10))} 
                   />
